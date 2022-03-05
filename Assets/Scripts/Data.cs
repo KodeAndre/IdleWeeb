@@ -7,8 +7,12 @@ public class Data
 {
     public BigDouble currency;
 
+    public BigDouble clickUpgradeLevel;
+
     public Data() {
         currency = 0;
+
+        clickUpgradeLevel = 0;
     }
 
 }
