@@ -10,6 +10,7 @@ public class Controller : MonoBehaviour
 
     public Data data;
     [SerializeField] private TMP_Text currencyText;
+    [SerializeField] private TMP_Text currencyPerSecondText;
     [SerializeField] private TMP_Text currencyClickPowerText;
 
     public BigDouble ClickPower() {
@@ -20,14 +21,25 @@ public class Controller : MonoBehaviour
         return total;
     }
 
+    public BigDouble CurrencyPerSecond() {
+        BigDouble total = 0;
+        for (int i = 0; i < data.productionUpgradeLevel.Count; i++) {
+            total += UpgradesManager.instance.productionUpgradesBasePower[i] * data.productionUpgradeLevel[i];
+        }
+        return total;
+    }
+
     public void Start() {
         data = new Data();
         UpgradesManager.instance.StartUpgradeManager();
     }
 
     public void Update() {
-        currencyText.text = data.currency.ToString("F2") + " Currency";
-        currencyClickPowerText.text = "+" + ClickPower() + " Currency";
+        currencyText.text = $"{data.currency:F2} Currency";
+        currencyPerSecondText.text = $"{CurrencyPerSecond():F2} /s";
+        currencyClickPowerText.text = $"+{ClickPower()} Currency";
+
+        data.currency = data.currency + CurrencyPerSecond() * Time.deltaTime;
     }
 
     public void AddCurrency() {
