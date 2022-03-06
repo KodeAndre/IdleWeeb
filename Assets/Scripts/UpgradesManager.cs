@@ -22,7 +22,7 @@ public class UpgradesManager : MonoBehaviour
     public BigDouble[] clickUpgradesBasePower;
 
     public void StartUpgradeManager() {
-        Methods.UpgradeCheck(ref Controller.instance.data.clickUpgradeLevel, 4);
+        Methods.UpgradeCheck(Controller.instance.data.clickUpgradeLevel, 4);
 
         clickUpgradesNames = new []{"Click Power +1", "Click Power +5", "Click Power +10", "Click Power +25"};
         clickUpgradeBaseCost = new BigDouble[]{10, 50, 100, 1000};

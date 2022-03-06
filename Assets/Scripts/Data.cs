@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using BreakInfinity;
 
@@ -12,7 +13,7 @@ public class Data
     public Data() {
         currency = 0;
 
-        clickUpgradeLevel = Methods.CreateList<BigDouble>(4);
+        clickUpgradeLevel = new BigDouble[4].ToList();
     }
 
 }
