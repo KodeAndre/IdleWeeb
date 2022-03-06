@@ -29,10 +29,13 @@ public class Controller : MonoBehaviour
         return total;
     }
 
+    private const string dataFileName = "PlayerData";
     public void Start() {
-        data = new Data();
+        data = SaveSystem.SaveExists(dataFileName) ? SaveSystem.LoadData<Data>(dataFileName) : new Data();
         UpgradesManager.instance.StartUpgradeManager();
     }
+
+    public float SaveTime;
 
     public void Update() {
         currencyText.text = $"{data.currency:F2} Currency";
@@ -40,6 +43,12 @@ public class Controller : MonoBehaviour
         currencyClickPowerText.text = $"+{ClickPower()} Currency";
 
         data.currency = data.currency + CurrencyPerSecond() * Time.deltaTime;
+
+        SaveTime += Time.deltaTime * (1 / Time.timeScale);
+        if (SaveTime >= 15) {
+            SaveSystem.SaveData(data, dataFileName);
+            SaveTime = 0;
+        }
     }
 
     public void AddCurrency() {
