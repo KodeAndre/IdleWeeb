@@ -7,12 +7,12 @@ public class Data
 {
     public BigDouble currency;
 
-    public BigDouble clickUpgradeLevel;
+    public List<BigDouble> clickUpgradeLevel;
 
     public Data() {
         currency = 0;
 
-        clickUpgradeLevel = 0;
+        clickUpgradeLevel = Methods.CreateList<BigDouble>(4);
     }
 
 }
